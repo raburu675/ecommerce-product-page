@@ -1,7 +1,7 @@
 import React from 'react'
 import  ReactDOM  from 'react-dom';
 
-function Modal({modal,selectedProduct,handleCloseModal}) {
+function Modal({modal,addToCart,selectedProduct,handleCloseModal}) {
     if (!modal  ) return null;
 
   return ReactDOM.createPortal(
@@ -22,41 +22,45 @@ function Modal({modal,selectedProduct,handleCloseModal}) {
                <div className='flex'>
                <div>
                  <img src={selectedProduct.url} 
+                 alt='IMG'
                  className=' overflow-hidden text-center object-cover h-96 px-8 pt-8 mb-8'
                  />
                </div>
      
-               <div className='pt-12 text-lg w-3/5 font-bold'>
-               <h3 className='px-12 py-2 font-medium'>{selectedProduct.name}</h3>
-               <h3 className='px-12 py-2 font-medium'>{selectedProduct.abv}</h3>
-               <h3 className='px-12 py-2 font-medium'>Availability : In stock</h3>
-               <div className='flex px-12'>
+               <div className='pt-12 text-lg w-3/5 font-bold '>
+               <h3 className='px-12 py-2 text-3xl underline font-bold'>{selectedProduct.name}</h3>
+               <h3 className='px-12 pt-8 font-medium ml-12'>{selectedProduct.abv}</h3>
+               <h3 className='px-12 pb-4 font-medium ml-12'>Availability : In stock</h3>
+               <div className='flex ml-12 w-1/4'>
                   <button 
-                  className='border border-black rounded-full mr-2 px-2'
-                //   onClick={()=>decrement()}
-                  >-</button>
-                  <div
-                  type='number' 
-                  className='border border-black w-16 rounded-md text-center font-sans'>
-                  {/* ({quantity}) */}
-                  1
-                  </div>
+                  className='px-6 text-white bg-red-900 rounded-lg ml-12'
+                  >
+                    -
+                  </button>
+                  <p className='mx-2'>1</p>
                   <button 
-                  className='border border-black rounded-full ml-2 px-2'
-                //   onClick={()=>increment()}
-                  >+</button>
+                  className='px-6 text-white bg-gray-900 rounded-lg'
+                  >
+                    +
+                  </button>
                </div>
                
-               <div className='flex px-12 py-6 font-medium'>
-               <p className='mr-6 font-medium'>{selectedProduct.quantity}</p>
+               <div className='flex flex-col py-6 font-semibold ml-24 '>
+               <p className=' font-medium font-bold '>Quantity:  {selectedProduct.quantity}</p>
                {/* <p>ksh {selectedProduct.price * quantity}</p> */}
-               <p className='mr-6 font-medium'>{selectedProduct.price}</p>
+               <p className=' font-medium  '>ksh: {selectedProduct.price}</p>
                </div>
      
                <button 
             //    onClick={()=> openCheckout()}
-               className=' ml-12 px-16 py-2 bg-black text-white text-xs rounded-md hover:bg-white hover:text-black hover:border hover:border-gray-600 '>
+               className=' ml-12 px-10 py-2 bg-blue-900 text-white text-xs rounded-md hover:text-green-100 '>
                Buy
+               </button>
+               <button 
+               className='mx-4 rounded-md text-xs py-2 px-6 bg-red-800 text-white'
+               onClick={() => addToCart()}
+               >
+                Add To Cart
                </button>
                </div>
                </div>

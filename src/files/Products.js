@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect} from 'react'
 import Modal from './Modal'
 import CartPopup from './CartPopup'
+import Cart from './cart'
+import Nav from './Nav'
 
 function Products() {
-    //create state that will hold the products in an empty array
-    const [products,setProducts] = useState([
-        { id: 37, name:"Robertson winery rose red", price:"1900", quantity:"750ml", abv:"ABV: 35%",url:"https://storage.googleapis.com/drinksvine/products/robertson-winery-rose.webp",initialNumber:1 },
-        // { id: 38, name:"Robertson winery rose white", price:"1900", quantity:"750ml", abv:"ABV: 35%",url:"https://storage.googleapis.com/drinksvine/products/robertson-winery.webp" ,initialNumber:1},
-        { id: 39, name:"Four cousins", price:"1300", quantity:"750ml", abv:"ABV: 35%",url:"https://soys.co.ke/PImages/LHOUP-0.jpg" ,initialNumber:1},
-        { id: 40,name:"4th Street", price:"850", quantity:"750ml", abv:"ABV: 40%", url:"https://cdnprod.mafretailproxy.com/sys-master-root/h06/he9/12462980923422/41697_Main.jpg_480Wx480H",initialNumber:1},
-        { id: 41,name:"Asconi pastrol", price:"2080", quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/drinksvine/products/asconi-pastoral.webp",initialNumber:1},
-        { id: 42, name:"Nerderberg", price:"850", quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
-        { id: 43, name:"Cella cask Red", price:"2300", quantity:"750ml", abv:"ABV: 35%" ,url:"https://jayswines.com/wp-content/uploads/2020/09/cellar-cask-red.png" ,initialNumber:1},
-        { id: 44, name:"Cella cask White", price:"1900", quantity:"750ml", abv:"ABV: 40%",url:"https://soys.co.ke/PImages/HYAYJ-0.jpg",initialNumber:1 },
+    const [products] = useState([
+        { id: 41,name:"Gran Verano Cabernet Sauvignon", price:1500, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/gran-verano-cabernet-sauvignon.webp",initialNumber:1},
+        { id: 42, name:"Sileni Estates Straits", price:5200, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/Sileni-estates-straits.webp" ,initialNumber:1},
+        { id: 43, name:"Frontera cabernet Sauvignon", price:1650, quantity:"750ml", abv:"ABV: 35%" ,url:"https://storage.googleapis.com/zoneke/products/frontera-caberbet-sauvignon.webp" ,initialNumber:1},
+        { id: 44, name:"Gran Verano auivgnon Blanc", price:1500, quantity:"750ml", abv:"ABV: 40%",url:"https://storage.googleapis.com/zoneke/products/gran-verano-sauvignon-blanc.webp",initialNumber:1 },
+        { id: 41,name:"Offley Reserve Port", price:3499, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/Offley-reserve-port.webp",initialNumber:1},
+        { id: 42, name:"Porcupine Ridge Carbanet Sauvignon", price:"2900", quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
+        { id: 43, name:"Nederburg Chenin Blanc", price:1950, quantity:"750ml", abv:"ABV: 35%" ,url:"https://storage.googleapis.com/zoneke/products/nederburg-chenin-blanc.webp" ,initialNumber:1},
+        { id: 44, name:"Sileni Estates Pinot Noir", price:5800, quantity:"750ml", abv:"ABV: 40%",url:"https://storage.googleapis.com/zoneke/products/Sileni-estates-pinot-noir.webp",initialNumber:1 },
+        { id: 37, name:"Robertson winery rose red", price:1900, quantity:"750ml", abv:"ABV: 35%",url:"https://storage.googleapis.com/drinksvine/products/robertson-winery-rose.webp",initialNumber:1 },
+        { id: 39, name:"Four cousins", price:1300, quantity:"750ml", abv:"ABV: 35%",url:"https://soys.co.ke/PImages/LHOUP-0.jpg" ,initialNumber:1},
+        { id: 40,name:"4th Street", price:850, quantity:"750ml", abv:"ABV: 40%", url:"https://cdnprod.mafretailproxy.com/sys-master-root/h06/he9/12462980923422/41697_Main.jpg_480Wx480H",initialNumber:1},
+        { id: 41,name:"Asconi pastrol", price:2080, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/drinksvine/products/asconi-pastoral.webp",initialNumber:1},
+        { id: 42, name:"Nerderberg", price:850, quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
+        { id: 43, name:"Cella cask Red", price:2300, quantity:"750ml", abv:"ABV: 35%" ,url:"https://jayswines.com/wp-content/uploads/2020/09/cellar-cask-red.png" ,initialNumber:1},
+        { id: 44, name:"Cella cask White", price:1900, quantity:"750ml", abv:"ABV: 40%",url:"https://soys.co.ke/PImages/HYAYJ-0.jpg",initialNumber:1 },    
     ])
 
     const [selectedProduct, setSelectedProduct] = useState(false)
@@ -41,8 +49,84 @@ function Products() {
     const closeCartPopup = () => {
         setCartPopup(false)
     }
+
+    //make to to set the empty array to local storage
+     const [cart,setCart] = useState([])
+
+     //state to hold the error and success message
+     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+     const [showErrorPopup, setShowErrorPopup] = useState(false);
+
+    //function to add items to the cart
+    const addToCart = (product) => {
+        //check if the product is already in the cart
+        const isAlreadyAdded = cart.some((item) => item.id === product.id);
+
+        if (isAlreadyAdded){
+            //set state to hold slide message to show item is already in the cart
+            console.log('item is already added')
+            // Set state to show error popup
+            setShowErrorPopup(true);
+        }else{
+            setCart([...cart,product]);
+            //set state to hold the success slide message
+            console.log('product added to cart', product)
+            // Set state to show success popup
+            setShowSuccessPopup(true);
+        }
+    }
+
+    // useEffect to hide popups after 10 seconds
+    useEffect(() => {
+        const hidePopups = () => {
+        setShowSuccessPopup(false);
+        setShowErrorPopup(false);
+        };
+
+        const timeoutId = setTimeout(hidePopups, 10000);
+
+        return () => clearTimeout(timeoutId);
+    }, [showSuccessPopup, showErrorPopup]);
+    
+
+    // Define a function 'increment' that updates the quantity of a specific item by 1
+    const increment = (itemId) => {
+        setCart((prevCart) =>
+          // Use 'map' to create a new array with updated quantity for the specified item
+          prevCart.map((item) =>
+            item.id === itemId ? { ...item, initialNumber: item.initialNumber + 1 } : item
+          )
+        );    
+    };
+
+    // Define a function 'decrement' that updates the quantity of a specific item by 1, with a minimum of 1
+    const decrement = (itemId) => {
+        setCart((prevCart) =>
+        // Use 'map' to create a new array with updated quantity for the specified item
+        prevCart.map((item) =>
+            item.id === itemId
+            ? { ...item, initialNumber: Math.max(item.initialNumber - 1, 1) }
+            : item
+        ));
+    };
+
+    // Define the clearCart function to set the cart state to an empty array
+    const clearCart = () => {
+        setCart([]);
+    };
+
+    //function to remove an item from the cart
+    const removeFromCart = (itemId) => {
+        //create an array that excludes the item with the specified ID
+        const updatedCart = cart.filter((item) => item.id !== itemId)
+        //update the cart with the new array
+        setCart(updatedCart);
+        console.log('item removed', itemId)
+        console.log("new item list",updatedCart)
+    };
+
   return (
-            <div className=''>
+            <div>
             <Modal
             modal={modal}
             handleCloseModal={handleCloseModal}
@@ -51,26 +135,45 @@ function Products() {
             />
 
             <CartPopup
+            cart={cart}
+            addToCart={addToCart}
             cartPopup={cartPopup}
             setCartPopup={setCartPopup}
             selectedProduct={selectedProduct}
             closeCartPopup={closeCartPopup}
-            /> 
-            <div className='w-full flex flex-col font-vollkorn justify-center items-center pt-24'>
-            <h2 className='text-center my-2 text-red-700 text-4xl '>WINE SHOP</h2>
-            <div className=' w-2/3  flex flex-wrap justify-center  font-vollkorn'>
+            />
+
+            <Nav
+            cart={cart}
+            setCart={setCart}
+            setSelectedProduct={setSelectedProduct}
+            increment={increment}
+            decrement={decrement}
+            clearCart={clearCart}
+            removeFromCart={removeFromCart}
+            />
+
+            <Cart
+            cart={cart}
+            clearCart={clearCart}
+            />
+            
+            <div className=' w-full flex flex-col font-vollkorn justify-center items-center pt-24'>
+            <h2 className='text-center my-2 text-red-700 text-4xl'>WINE SHOP</h2>
+            <div className=' w-2/3 flex flex-wrap justify-center'>
                     {products.map((val,id) =>(
                     <div className='w-60 h-2/6 border border-gray-300 rounded-md my-2 mx-2 bg-white hover:shadow-2xl'>
-                    <p className='relative text-xs flex justify-end py-2 pr-2'>{val.abv}</p>
+                    <p className='text-xs flex justify-end py-2 pr-2'>{val.abv}</p>
                     <img src={val.url}
+                    alt='IMG'
                     className=' overflow-hidden text-center object-cover h-44 my-2 px-12 cursor-pointer'
                     onClick={()=>handleOpenModal(val)}
                     />
                     <div class='border-b border-gray-400 ml-3 w-11/12'></div>
                     <div className='py-2 flex flex-col items-center'>
-                            <p  className='pl-2 text-xs uppercase font-vollkorn font-semibold'>{val.name}</p>
-                            <p  className='pl-2 text-xs upprercase font-semibold'>{val.quantity}</p>
-                            <p  className='pl-2 text-xs font-semibold'>ksh{val.price}</p>
+                            <p className='pl-2 text-xs uppercase font-semibold'>{val.name}</p>
+                            <p className='pl-2 text-xs upprercase font-semibold'>{val.quantity}</p>
+                            <p className='pl-2 text-xs font-semibold'>ksh{val.price}</p>
                     </div>
                 
                     <div className='flex justify-center'>
@@ -82,12 +185,29 @@ function Products() {
                     </div>
                     ))}
             </div>
-            </div>
-            </div>
-           
+
             
-             
-      
+            {showSuccessPopup && (
+                <div className=" mt-20 py-2 px-2  bg-green-700 z-30">
+                {/* Content for success popup */}
+                Product added to cart successfully!
+                </div>
+            )}
+
+            
+            {showErrorPopup && (
+                <div className="py-2 px-2  bg-red-700 ">
+                {/* Content for error popup */}
+                Item is already in the cart!
+                </div>
+            )}
+            
+
+            </div>
+                    
+
+            </div>
+
   )
 }
 
