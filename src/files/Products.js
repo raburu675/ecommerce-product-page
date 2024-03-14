@@ -6,21 +6,21 @@ import Nav from './Nav'
 
 function Products() {
     const [products] = useState([
-        { id: 41,name:"Gran Verano Cabernet Sauvignon", price:1500, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/gran-verano-cabernet-sauvignon.webp",initialNumber:1},
-        { id: 42, name:"Sileni Estates Straits", price:5200, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/Sileni-estates-straits.webp" ,initialNumber:1},
-        { id: 43, name:"Frontera cabernet Sauvignon", price:1650, quantity:"750ml", abv:"ABV: 35%" ,url:"https://storage.googleapis.com/zoneke/products/frontera-caberbet-sauvignon.webp" ,initialNumber:1},
-        { id: 44, name:"Gran Verano auivgnon Blanc", price:1500, quantity:"750ml", abv:"ABV: 40%",url:"https://storage.googleapis.com/zoneke/products/gran-verano-sauvignon-blanc.webp",initialNumber:1 },
-        { id: 41,name:"Offley Reserve Port", price:3499, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/Offley-reserve-port.webp",initialNumber:1},
-        { id: 42, name:"Porcupine Ridge Carbanet Sauvignon", price:"2900", quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
-        { id: 43, name:"Nederburg Chenin Blanc", price:1950, quantity:"750ml", abv:"ABV: 35%" ,url:"https://storage.googleapis.com/zoneke/products/nederburg-chenin-blanc.webp" ,initialNumber:1},
-        { id: 44, name:"Sileni Estates Pinot Noir", price:5800, quantity:"750ml", abv:"ABV: 40%",url:"https://storage.googleapis.com/zoneke/products/Sileni-estates-pinot-noir.webp",initialNumber:1 },
-        { id: 37, name:"Robertson winery rose red", price:1900, quantity:"750ml", abv:"ABV: 35%",url:"https://storage.googleapis.com/drinksvine/products/robertson-winery-rose.webp",initialNumber:1 },
-        { id: 39, name:"Four cousins", price:1300, quantity:"750ml", abv:"ABV: 35%",url:"https://soys.co.ke/PImages/LHOUP-0.jpg" ,initialNumber:1},
-        { id: 40,name:"4th Street", price:850, quantity:"750ml", abv:"ABV: 40%", url:"https://cdnprod.mafretailproxy.com/sys-master-root/h06/he9/12462980923422/41697_Main.jpg_480Wx480H",initialNumber:1},
-        { id: 41,name:"Asconi pastrol", price:2080, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/drinksvine/products/asconi-pastoral.webp",initialNumber:1},
-        { id: 42, name:"Nerderberg", price:850, quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
-        { id: 43, name:"Cella cask Red", price:2300, quantity:"750ml", abv:"ABV: 35%" ,url:"https://jayswines.com/wp-content/uploads/2020/09/cellar-cask-red.png" ,initialNumber:1},
-        { id: 44, name:"Cella cask White", price:1900, quantity:"750ml", abv:"ABV: 40%",url:"https://soys.co.ke/PImages/HYAYJ-0.jpg",initialNumber:1 },    
+        { id: 1,name:"Gran Verano Cabernet Sauvignon", price:1500, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/gran-verano-cabernet-sauvignon.webp",initialNumber:1},
+        { id: 2, name:"Sileni Estates Straits", price:5200, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/Sileni-estates-straits.webp" ,initialNumber:1},
+        { id: 3, name:"Frontera cabernet Sauvignon", price:1650, quantity:"750ml", abv:"ABV: 35%" ,url:"https://storage.googleapis.com/zoneke/products/frontera-caberbet-sauvignon.webp" ,initialNumber:1},
+        { id: 4, name:"Gran Verano auivgnon Blanc", price:1500, quantity:"750ml", abv:"ABV: 40%",url:"https://storage.googleapis.com/zoneke/products/gran-verano-sauvignon-blanc.webp",initialNumber:1 },
+        { id: 5,name:"Offley Reserve Port", price:3499, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/zoneke/products/Offley-reserve-port.webp",initialNumber:1},
+        { id: 6, name:"Porcupine Ridge Carbanet Sauvignon", price:"2900", quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
+        { id: 7, name:"Nederburg Chenin Blanc", price:1950, quantity:"750ml", abv:"ABV: 35%" ,url:"https://storage.googleapis.com/zoneke/products/nederburg-chenin-blanc.webp" ,initialNumber:1},
+        { id: 8, name:"Sileni Estates Pinot Noir", price:5800, quantity:"750ml", abv:"ABV: 40%",url:"https://storage.googleapis.com/zoneke/products/Sileni-estates-pinot-noir.webp",initialNumber:1 },
+        { id: 9, name:"Robertson winery rose red", price:1900, quantity:"750ml", abv:"ABV: 35%",url:"https://storage.googleapis.com/drinksvine/products/robertson-winery-rose.webp",initialNumber:1 },
+        { id: 10, name:"Four cousins", price:1300, quantity:"750ml", abv:"ABV: 35%",url:"https://soys.co.ke/PImages/LHOUP-0.jpg" ,initialNumber:1},
+        { id: 20,name:"4th Street", price:850, quantity:"750ml", abv:"ABV: 40%", url:"https://cdnprod.mafretailproxy.com/sys-master-root/h06/he9/12462980923422/41697_Main.jpg_480Wx480H",initialNumber:1},
+        { id: 21,name:"Asconi pastrol", price:2080, quantity:"750ml", abv:"ABV: 40%", url:"https://storage.googleapis.com/drinksvine/products/asconi-pastoral.webp",initialNumber:1},
+        { id: 22, name:"Nerderberg", price:850, quantity:"750ml", abv:"ABV: 40%", url:"https://jayswines.com/wp-content/uploads/2020/09/NEDERBURG-MERLOT-1.jpg" ,initialNumber:1},
+        { id: 23, name:"Cella cask Red", price:2300, quantity:"750ml", abv:"ABV: 35%" ,url:"https://jayswines.com/wp-content/uploads/2020/09/cellar-cask-red.png" ,initialNumber:1},
+        { id: 24, name:"Cella cask White", price:1900, quantity:"750ml", abv:"ABV: 40%",url:"https://soys.co.ke/PImages/HYAYJ-0.jpg",initialNumber:1 },    
     ])
 
     const [selectedProduct, setSelectedProduct] = useState(false)
@@ -50,15 +50,17 @@ function Products() {
         setCartPopup(false)
     }
 
-    //make to to set the empty array to local storage
-     const [cart,setCart] = useState([])
+    // Check if there are items stored in local storage, otherwise initialize with an empty array
+    const initialCart = JSON.parse(localStorage.getItem('cart')) || [];
+    const [cart, setCart] = useState(initialCart);
 
-     //state to hold the error and success message
-     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-     const [showErrorPopup, setShowErrorPopup] = useState(false);
+     useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }, [cart]);
 
     //function to add items to the cart
     const addToCart = (product) => {
+        console.log("Product:", product);
         //check if the product is already in the cart
         const isAlreadyAdded = cart.some((item) => item.id === product.id);
 
@@ -75,6 +77,9 @@ function Products() {
             setShowSuccessPopup(true);
         }
     }
+    //state to hold the error and success message
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [showErrorPopup, setShowErrorPopup] = useState(false);
 
     // useEffect to hide popups after 10 seconds
     useEffect(() => {
@@ -132,6 +137,11 @@ function Products() {
             handleCloseModal={handleCloseModal}
             handleOpenModal={handleOpenModal}
             selectedProduct={selectedProduct}
+            addToCart={addToCart}
+            cart={cart}
+            setCart={setCart}
+            increment={increment}
+            decrement={decrement}
             />
 
             <CartPopup
@@ -146,6 +156,8 @@ function Products() {
             <Nav
             cart={cart}
             setCart={setCart}
+            addToCart={addToCart}
+            selectedProduct={selectedProduct}
             setSelectedProduct={setSelectedProduct}
             increment={increment}
             decrement={decrement}
@@ -155,7 +167,6 @@ function Products() {
 
             <Cart
             cart={cart}
-            clearCart={clearCart}
             />
             
             <div className=' w-full flex flex-col font-vollkorn justify-center items-center pt-24'>
@@ -211,4 +222,4 @@ function Products() {
   )
 }
 
-export default Products
+export default Products;

@@ -1,8 +1,42 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import  ReactDOM  from 'react-dom';
+import Cart from './cart';
 
-function Modal({modal,addToCart,selectedProduct,handleCloseModal}) {
+function Modal({cart=[],setCart,modal,addToCart,selectedProduct,handleCloseModal,}) {
     if (!modal  ) return null;
+
+    //state to hold the quantity of the products
+    const [quantity,setQuantity] = useState(1)
+    const [totalPrice, setTotalPrice] = useState(selectedProduct.price);
+
+    //functions to increment and decrement the initialNumber of the products in the Modal
+    const increment = () => {
+      setQuantity(quantity+1)
+    }
+
+    const decrement = () => {
+      //ensure quantity doesnt go below 1
+      setQuantity(Math.max(quantity-1,1));
+      updateTotalPrice();
+    }
+
+    useEffect(() => {
+      // Update total price whenever quantity changes
+      setTotalPrice(selectedProduct.price * quantity);
+    }, [quantity, selectedProduct.price]);
+
+    const updateTotalPrice = () => {
+      setTotalPrice(selectedProduct.price * quantity);
+    };
+
+    const handleClose = () => {
+      // Reset quantity when closing the modal 
+      setQuantity(1);
+      //reset total price when closing the modal
+      setTotalPrice(selectedProduct.price);
+      // Call the provided handleCloseModal function
+      handleCloseModal();
+    };
 
   return ReactDOM.createPortal(
     <div>
@@ -34,31 +68,33 @@ function Modal({modal,addToCart,selectedProduct,handleCloseModal}) {
                <div className='flex ml-12 w-1/4'>
                   <button 
                   className='px-6 text-white bg-red-900 rounded-lg ml-12'
+                  onClick={() => decrement(selectedProduct.id)}
                   >
                     -
                   </button>
-                  <p className='mx-2'>1</p>
+                  <p className='mx-2'>{quantity}</p>
                   <button 
                   className='px-6 text-white bg-gray-900 rounded-lg'
+                  onClick={() => increment(selectedProduct.id)}
                   >
                     +
                   </button>
                </div>
                
                <div className='flex flex-col py-6 font-semibold ml-24 '>
-               <p className=' font-medium font-bold '>Quantity:  {selectedProduct.quantity}</p>
+               <p className=' font-medium'>Quantity:  {selectedProduct.quantity}</p>
                {/* <p>ksh {selectedProduct.price * quantity}</p> */}
-               <p className=' font-medium  '>ksh: {selectedProduct.price}</p>
+               {/* <p className=' font-medium  '>ksh: {selectedProduct.price}</p> */}
+               <p className='font-medium '>ksh : {selectedProduct.price * quantity}</p>
                </div>
      
                <button 
-            //    onClick={()=> openCheckout()}
                className=' ml-12 px-10 py-2 bg-blue-900 text-white text-xs rounded-md hover:text-green-100 '>
                Buy
                </button>
                <button 
                className='mx-4 rounded-md text-xs py-2 px-6 bg-red-800 text-white'
-               onClick={() => addToCart()}
+               onClick={() => addToCart(selectedProduct)}
                >
                 Add To Cart
                </button>
@@ -67,6 +103,10 @@ function Modal({modal,addToCart,selectedProduct,handleCloseModal}) {
         </div>
         </div>
     )}
+        <Cart
+        cart={cart}
+        setCart={setCart}
+        />
     </div>
     ,
     document.getElementById('modal')

@@ -3,7 +3,7 @@ import Cart from './cart'
 import Modal from './Modal';
 
 
-function Nav() {
+function Nav({cart,setCart,increment,decrement,selectedProduct,setSelectedProduct,addToCart,clearCart,removeFromCart}) {
   const [searchTerm, setSearchTerm] = useState('');
 
   //create state that will hold the products in an empty array
@@ -26,7 +26,7 @@ function Nav() {
     { id: 44, name:"Cella cask White", price:"1900", quantity:"750ml", abv:"ABV: 40%",url:"https://soys.co.ke/PImages/HYAYJ-0.jpg",initialNumber:1 },    
 ])
 
-const [selectedProduct, setSelectedProduct] = useState(false)
+// const [selectedProduct, setSelectedProduct] = useState(false)
 
 //state to hold the cart
 const [ displayCart,setDisplayCart ] = useState(false)
@@ -56,67 +56,6 @@ const handleCloseModal = () => {
 }
 
 
-    //make to to set the state to an empty array
-     const [cart,setCart] = useState([])
-
-     //state to hold the error and success message
-     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-     const [showErrorPopup, setShowErrorPopup] = useState(false);
-
-    //function to add items to the cart
-    const addToCart = (product) => {
-        //check if the product is already in the cart
-        const isAlreadyAdded = cart.some((item) => item.id === product.id);
-
-        if (isAlreadyAdded){
-            //set state to hold slide message to show item is already in the cart
-            console.log('item is already added')
-            // Set state to show error popup
-            setShowErrorPopup(true);
-        }else{
-            setCart([...cart,product]);
-            //set state to hold the success slide message
-            console.log('product added to cart', product)
-            // Set state to show success popup
-            setShowSuccessPopup(true);
-        }
-    }
-
-    // Define a function 'increment' that updates the quantity of a specific item by 1
-    const increment = (itemId) => {
-      setCart((prevCart) =>
-        // Use 'map' to create a new array with updated quantity for the specified item
-        prevCart.map((item) =>
-          item.id === itemId ? { ...item, initialNumber: item.initialNumber + 1 } : item
-        )
-      );    
-  };
-
-    // Define a function 'decrement' that updates the quantity of a specific item by 1, with a minimum of 1
-    const decrement = (itemId) => {
-        setCart((prevCart) =>
-        // Use 'map' to create a new array with updated quantity for the specified item
-        prevCart.map((item) =>
-            item.id === itemId
-            ? { ...item, initialNumber: Math.max(item.initialNumber - 1, 1) }
-            : item
-        ));
-    };
-
-    // Define the clearCart function to set the cart state to an empty array
-    const clearCart = () => {
-        setCart([]);
-    };
-
-    //function to remove an item from the cart
-    const removeFromCart = (itemId) => {
-      //create an array that excludes the item with the specified ID
-      const updatedCart = cart.filter((item) => item.id !== itemId)
-      //update the cart with the new array
-      setCart(updatedCart);
-      console.log('item removed', itemId)
-      console.log("new item list",updatedCart)
-    };
   return (
         <div>
         <Cart
